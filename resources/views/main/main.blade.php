@@ -1,5 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+@section('title')
+    <title>{{ $title }}</title>
+@endsection
 
 <head>
     @include('main.components.head')
