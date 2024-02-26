@@ -48,3 +48,14 @@ if(!function_exists('menu')){
         return $html;
     }
 }
+if (!function_exists('price')) {
+    function price($price = 0, $price_sale = 0)
+    {
+        if ($price_sale != 0)
+            return $price_sale;
+
+        if ($price != 0)
+            return $price;
+        return 'Liên hệ';
+    }
+}
