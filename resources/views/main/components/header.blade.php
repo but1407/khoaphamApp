@@ -1,4 +1,7 @@
-    <!-- Header -->
+   @php
+       $menuHtml = menu($menus) ;
+   @endphp 
+   <!-- Header -->
     <header>
         <!-- Header desktop -->
         <div class="container-menu-desktop">
@@ -100,35 +103,12 @@
 
         <!-- Menu Mobile -->
         <div class="menu-mobile">
-            <ul class="topbar-mobile">
-                <li>
-                    <div class="left-top-bar">
-                        Free shipping for standard order over $100
-                    </div>
-                </li>
-
-                <li>
-                    <div class="right-top-bar flex-w h-full">
-                        <a href="#" class="flex-c-m p-lr-10 trans-04">
-                            Help & FAQs
-                        </a>
-
-                        <a href="#" class="flex-c-m p-lr-10 trans-04">
-                            My Account
-                        </a>
-
-                        <a href="#" class="flex-c-m p-lr-10 trans-04">
-                            EN
-                        </a>
-
-                        <a href="#" class="flex-c-m p-lr-10 trans-04">
-                            USD
-                        </a>
-                    </div>
-                </li>
-            </ul>
 
             <ul class="main-menu-m">
+                <li class="main-menu"><a href="#">Trang chủ</a></li>
+                {!! $menuHtml !!}
+            </ul>
+            {{-- <ul class="main-menu-m">
                 <li class="main-menu">
                     <a href="/">Trang chủ</a>
                 </li>
@@ -153,7 +133,7 @@
                 <li>
                     <a href="contact.html">Contact</a>
                 </li>
-            </ul>
+            </ul> --}}
         </div>
 
         <!-- Modal Search -->

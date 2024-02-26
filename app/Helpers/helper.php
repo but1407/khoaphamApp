@@ -26,3 +26,25 @@ if(!function_exists('category')){
         return $html;
     }
 }
+if(!function_exists('menu')){
+    function menu($menus,$parent_id=0){
+        $html = '';
+        foreach($menus as $key=>$menu){
+            if($menu->parent_id == $parent_id){
+                $html .= '
+                    <li>
+                        <a href="/menu/'. $menu->id . '-' . Str::slug($menu->name) .'.html">'
+                        . $menu->name   .'</a>';
+                unset($menus[$key]);
+                if($menu->menuChild->count()  == true){
+                    $html .= '<ul class="sub-menu-m">';
+                    $html .= menu($menu->menuChild, $menu->id);
+                    $html .= '</ul>';
+
+                }
+                $html.='</li>';
+            }
+        }
+        return $html;
+    }
+}

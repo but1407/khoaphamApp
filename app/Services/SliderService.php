@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Services\Slider;
+namespace App\Services;
 
 
 use App\Models\Slider;
