@@ -21,8 +21,17 @@ class ProductService {
 
     }
     public function show($id){
-        return Product::where('status', 1)->find($id);
+        return Product::where('status', 1)->with('categories')->find($id);
     }
+    public function more($id){
+        return Product::select('id', 'name', 'price', 'price_sale', 'feature_image_path')
+        ->where('status', 1)
+        ->where('id','!=', $id)
+        ->orderByDesc('id')
+        ->limit(8)
+        ->get();
+    }
+    
     
 
     

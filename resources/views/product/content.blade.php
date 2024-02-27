@@ -1,4 +1,8 @@
 @extends('main.main')
+@php
+    $base_url = config('app.base_url');
+@endphp
+
 
 @section('content')
 
@@ -29,7 +33,7 @@
                         <div class="wrap-slick3-dots">
                             <ul class="slick3-dots" style="" role="tablist">
                                 <li class="slick-active" role="presentation">
-                                    <img src="{{ $product->feature_image_path }}">
+                                    <img src="{{ $base_url .  $product->feature_image_path }}">
                                     <div class="slick3-dot-overlay"></div>
                                 </li>
                             </ul>
@@ -51,7 +55,7 @@
                                             tabindex="0" role="tabpanel" id="slick-slide10"
                                             aria-describedby="slick-slide-control10">
                                         <div class="wrap-pic-w pos-relative">
-                                            <img src="{{ $product->feature_image_path }}" alt="IMG-PRODUCT">
+                                            <img src="{{ $base_url . $product->feature_image_path }}" alt="IMG-PRODUCT">
 
                                             <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
                                                href="{{ asset('images/product-detail-01.jpg') }}" tabindex="0">
@@ -76,7 +80,7 @@
                     </h4>
 
                     <span class="mtext-106 cl2">
-                        {!! price($product->price, $product->price_sale) !!}
+                        ${!! price($product->price, $product->price_sale) !!}
                     </span>
 
                     <p class="stext-102 cl3 p-t-23">
@@ -88,7 +92,7 @@
                         <div class="flex-w flex-r-m p-b-10">
                             <div class="size-204 flex-w flex-m respon6-next">
                                 <form action="/add-cart" method="post">
-                                    @if ($product->price !== NULL)
+                                    @if ($product->price != 0)
                                         <div class="wrap-num-product flex-w m-r-20 m-tb-10">
                                             <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
                                                 <i class="fs-16 zmdi zmdi-minus"></i>
@@ -333,7 +337,7 @@
     </div>
 </section>
 
-{{-- <section class="sec-relate-product bg0 p-t-45 p-b-105">
+<section class="sec-relate-product bg0 p-t-45 p-b-105">
     <div class="container">
         <div class="p-b-45">
             <h3 class="ltext-106 cl5 txt-center">
@@ -343,5 +347,5 @@
 
         @include('product.list')
     </div>
-</section> --}}
+</section>
 @endsection 

@@ -19,10 +19,13 @@ class ProductController extends Controller
     public function index(Request $request, $id, $slug){
         // dd(2);
         $product = $this->productService->show($id);
+        $productMore = $this->productService->more($id);
+
         return view('product.content',[
             'title'=> $product->name,
             'product'=>$product,
             'menus'=>$this->menuService->show(),
+            'products'=>$productMore,
         ]);
     }
 }
