@@ -7,11 +7,17 @@ function loadMore() {
     const page = $('#page').val();
     $.ajax({
         type: 'POST',
-        dataType: 'json',
-        data: { page },
+        dataType: 'JSON',
+        data: {page},
         url: '/services/load-products',
         success: (result) => { 
-            console.log(result);
+            if (result.html !== '') {
+                $('#loadData').append(result.html);
+                $('page').val(page + 1);
+            } else {
+                alert('Đã load xong data');
+                $('#button-loadData').css('display', 'none');
+            }
         }
     });
 }

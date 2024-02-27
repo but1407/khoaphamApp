@@ -46,9 +46,18 @@ class MainController extends Controller
     } 
 
     public function loadProduct(Request $request){
-        $page =$request->input('page');
-        dd($page );
+        $page =$request->input('page',0);
+        // dd($page);
         $result = $this->productService->get($page);
+        if(count($result) != 0){
+            $html = view('product.list',['products'=>$result])->render();
+            return response()->json([
+                'html' => $html
+            ]);
+        }
+        return response()->json([
+            'html' =>''
+        ]);
 
     }
 }

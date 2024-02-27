@@ -332,13 +332,14 @@
                     </div>
                 </div>
             </div>
-            <div class="row isotope-grid">
+            <div id="loadData">
+
                 @include('product.list')
             </div>
             <!-- Load more -->
-            <div class="flex-c-m flex-w w-full p-t-45">
+            <div class="flex-c-m flex-w w-full p-t-45" id="button-loadData">
                 <input type="hidden" value="1" id="page">
-                <a href="#" onclick="loadMore()" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
+                <a  onclick="loadMore()" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04 ">
                     Load More
                 </a>
             </div>
