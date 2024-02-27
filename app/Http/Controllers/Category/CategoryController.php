@@ -23,8 +23,9 @@ class CategoryController extends Controller
     }
     public function index(Request $request, $id, $slug)
     {
+        
         $category= $this->categoryService->getId($id);
-        $products= $this->categoryService->getProduct($category);
+        $products= $this->categoryService->getProduct($category,$request);
         // dd($category->parent_id);
         return view('category',[
             'title' => $category->name,

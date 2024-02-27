@@ -20,6 +20,9 @@ class ProductService {
         ->limit(self::LIMIT)->get();
 
     }
+    public function show($id){
+        return Product::where('status', 1)->find($id);
+    }
     
 
     

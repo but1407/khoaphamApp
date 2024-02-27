@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Main\MainController;
 use App\Http\Controllers\Category\CategoryController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,3 +19,4 @@ use App\Http\Controllers\Category\CategoryController;
 Route::get('/', [MainController::class,'index']);
 Route::post('/services/load-products',[MainController::class,'loadProduct']);
 Route::get('/category/{id}-{slug}.html', [CategoryController::class,'index']);
+Route::get('/san-pham/{id}-{slug}.html', [ProductController::class,'index']);

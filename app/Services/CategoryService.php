@@ -14,13 +14,21 @@ class CategoryService {
     public function getId($id){
         return Category::where('status',1)->find($id);
     }
-    public function getProduct($category){
-        return $category->products()
+    public function getProduct($category,$request){
+        $query =  $category->products()
         ->select('id','name','price','price_sale','feature_image_path')
-        ->where('status',1)
-        ->orderByDesc('id')
-        ->paginate(12);
-    }
+        ->where('status',1);
+        if($request->price == 'asc'){
+
+            $query = $query->orderBy('price_sale',$request->price);
+        } elseif($request->price == 'desc'){
+            $query = $query->orderBy('price_sale',$request->price);
+
+        } else{
+            $query = $query->orderByDesc('id');
+        }
+        return $query->paginate(10)->withQueryString();
+    } 
 
     
     
