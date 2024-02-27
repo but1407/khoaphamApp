@@ -2,23 +2,37 @@
 
 namespace App\Http\Controllers\Category;
 
-use App\Http\Controllers\Controller;
-use App\Services\CategoryService;
 use Illuminate\Http\Request;
+use App\Services\MenuService;
+use App\Services\CategoryService;
+use App\Http\Controllers\Controller;
 
 
 class CategoryController extends Controller
 {
     private $categoryService;
-    public function __construct(CategoryService $categoryService){
+    private $menuService;
+
+    public function __construct(CategoryService $categoryService,
+    MenuService $menuService,
+    ){
         $this->categoryService = $categoryService;
+        $this->menuService = $menuService;
+
 
     }
     public function index(Request $request, $id, $slug)
     {
         $category= $this->categoryService->getId($id);
-        $product= $this->categoryService->getProduct($category);
+        $products= $this->categoryService->getProduct($category);
+        // dd($category->parent_id);
+        return view('category',[
+            'title' => $category->name,
+            'products' => $products,
+            'category' => $category,
+            'menus'=>$this->menuService->show(),
 
-        dd($product);
+        ]);
+
     }
 }

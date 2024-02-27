@@ -36,7 +36,7 @@ if(!function_exists('menu')){
                         <a href="/menu/'. $menu->id . '-' . Str::slug($menu->name) .'.html">'
                         . $menu->name   .'</a>';
                 unset($menus[$key]);
-                if($menu->menuChild->count()  == true){
+                if($menu->menuChild->count()){
                     $html .= '<ul class="sub-menu-m">';
                     $html .= menu($menu->menuChild, $menu->id);
                     $html .= '</ul>';

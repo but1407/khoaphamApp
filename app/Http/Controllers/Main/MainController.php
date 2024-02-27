@@ -34,20 +34,18 @@ class MainController extends Controller
         $this->productService = $productService;
     }
     public function index(){
-        // dd($this->menuService->show()->menuChild);
-        // dd($this->productService->get());
-        return view('main.main',[
+        
+        return view('main.home',[
             'title' => 'Home',
             'categories' => $this->category->show(),
             'menus'=>$this->menuService->show(),
             'sliders'=> $this->sliderService->show(),
             'products'=>$this->productService->get(),
-            ]);
+        ]);
     } 
 
     public function loadProduct(Request $request){
         $page =$request->input('page',0);
-        // dd($page);
         $result = $this->productService->get($page);
         if(count($result) != 0){
             $html = view('product.list',['products'=>$result])->render();
