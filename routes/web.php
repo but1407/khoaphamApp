@@ -23,4 +23,10 @@ Route::get('/category/{id}-{slug}.html', [CategoryController::class,'index']);
 Route::get('/san-pham/{id}-{slug}.html', [ProductController::class,'index']);
 Route::post('add-cart',[CartController::class,'index']);
 Route::get('/carts',[CartController::class,'show']);
+Route::post('update-cart',[CartController::class,'update']);
+Route::get('carts/delete/{id}',[CartController::class,'remove']);
+Route::post('/carts',[CartController::class,'addCart']);
+
+
+
 
