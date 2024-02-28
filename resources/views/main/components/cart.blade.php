@@ -21,7 +21,8 @@
                 @php
                     $sumPrice =0;
                 @endphp
-                @if(is_array($carts) && count($carts)>0)
+                {{-- @dd($carts) --}}
+                @if( count($carts)>0)
                     @foreach ($carts as $cart )
                     @php
                         $price = price($cart->price ,$cart->price_sale);

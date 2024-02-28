@@ -1,5 +1,7 @@
 @extends('main.main')
-
+@php
+    $base_url = config('app.base_url');
+@endphp
 @section('content')
     <form class="bg0 p-t-130 p-b-85" method="post">
         @include('alert')
@@ -30,11 +32,11 @@
                                         <tr class="table_row">
                                             <td class="column-1">
                                                 <div class="how-itemcart1">
-                                                    <img src="{{ $product->thumb }}" alt="IMG">
+                                                    <img src="{{ $base_url . $product->feature_image_path }}" alt="IMG">
                                                 </div>
                                             </td>
                                             <td class="column-2">{{ $product->name }}</td>
-                                            {{-- <td class="column-3">{{ number_format($price, 0, '', '.') }}</td> --}}
+                                            <td class="column-3">${{ $price }}</td>
                                             <td class="column-4">
                                                 <div class="wrap-num-product flex-w m-l-auto m-r-0">
                                                     <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
@@ -49,6 +51,7 @@
                                                     </div>
                                                 </div>
                                             </td>
+                                            <td class="column-5">${{  $priceEnd  }}</td>
                                             {{-- <td class="column-5">{{ number_format($priceEnd, 0, '', '.') }}</td> --}}
                                             <td class="p-r-15">
                                                 <a href="/carts/delete/{{ $product->id }}">Xóa</a>
@@ -115,7 +118,7 @@
                                         </div>
 
                                         <div class="bor8 bg0 m-b-12">
-                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="address" placeholder="Địa Chỉ Giao Hàng">
+                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="address" placeholder="Địa Chỉ Giao Hàng" required>
                                         </div>
 
                                         <div class="bor8 bg0 m-b-12">

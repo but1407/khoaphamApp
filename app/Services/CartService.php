@@ -1,9 +1,12 @@
 <?php
 namespace App\Services;
 
+use App\Models\Cart;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Customer;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class CartService
@@ -58,7 +61,6 @@ class CartService
     public function update($request)
     {
         Session::put('carts', $request->input('num_product'));
-
         return true;
     }
 
@@ -69,6 +71,49 @@ class CartService
 
         Session::put('carts', $carts);
         return true;
+    }
+
+    public function addCart($request){
+        try{
+            DB::beginTransaction();
+            $carts = Session::get('carts'); 
+            if(is_null($carts)) return false;
+            $customer = Customer::create([
+                'name' => $request->name,
+                'phone' => $request->phone,
+                'address' => $request->address,
+                'email' => $request->email,
+                'content' => $request->content,
+
+            ]);
+            $this->infoProductCart($carts, $customer->id);
+            DB::commit();
+            Session::flash('success','Đặt hàng thành công');
+            Session::forget('carts');
+        } catch(\Exception $e){
+            DB::rollBack();
+            Session::flash('error', 'Đặt hàng lỗi, Vui lòng thử lại sau');
+            return false;
+        }
+        return true;
+    }
+
+    protected function infoProductCart($carts,$customer_id){
+        $productId = array_keys($carts);
+        $products = Product::select('id', 'name', 'price', 'price_sale', 'feature_image_path')
+            ->where('status', 1)
+            ->whereIn('id', $productId)
+            ->get();
+        $data = [];
+        foreach($products as $product){
+            $data[] = [
+                'customer_id' => $customer_id,
+                'product_id' => $product->id,
+                'qty' => $carts[$product->id],
+                'price' => $product->price_sale != 0 ? $product->price_sale : $product->price,
+            ];
+        }
+        return Cart::insert($data);
     }
 
 }
