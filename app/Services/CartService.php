@@ -100,6 +100,7 @@ class CartService
                 }
                 $orders[] =[
                     'name' =>$product->name,
+                    'image' =>$product->feature_image_path,
                     'price'=>price($product->price,$product->price_sale),
                     'qty'=> $quatity,
 

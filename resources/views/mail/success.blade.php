@@ -1,3 +1,7 @@
+@php
+    $base_url = config('app.base_url');
+@endphp
+
 <div style="font-family: Arial, sans-serif; background-color: #f5f5f5; padding: 20px;">
 
     <table style="max-width: 600px; margin: 0 auto; background-color: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
@@ -18,6 +22,7 @@
                 <table style="width: 100%; border-collapse: collapse;">
                     
                     <tr>
+                        <th style="border-bottom: 1px solid #ddd; text-align: left; padding: 10px;">Hình Ảnh</th>
                         <th style="border-bottom: 1px solid #ddd; text-align: left; padding: 10px;">Sản Phẩm</th>
                         <th style="border-bottom: 1px solid #ddd; text-align: left; padding: 10px;">Số Lượng</th>
                         <th style="border-bottom: 1px solid #ddd; text-align: right; padding: 10px;">Thành Tiền</th>
@@ -30,8 +35,11 @@
                         $total += $item['price'] * $item['qty']
                     @endphp
                         <tr>
+                            <td style="padding: 10px;">
+                                <img src="http://127.0.0.1:8080/{{ $item['image'] }}" alt="{{ $item['name'] }}" style="max-width: 100px; border-radius: 5px;">
+                            </td>
                             <td style="padding: 10px;">{{ $item['name'] }}</td>
-                            <td style="padding: 10px;">{{ $item['qty'] }}</td> 
+                            <td style="padding: 10px;">{{ $item['qty'] }}</td>
                             <td style="padding: 10px; text-align: right;">${{ $item['qty'] * $item['price'] }}</td>
                         </tr>
                     @endforeach
