@@ -26,7 +26,6 @@ class CategoryController extends Controller
         
         $category= $this->categoryService->getId($id);
         $products= $this->categoryService->getProduct($category,$request);
-        // dd($category->parent_id);
         return view('category',[
             'title' => $category->name,
             'products' => $products,

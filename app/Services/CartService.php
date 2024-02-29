@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Models\Cart;
+use App\Jobs\SendMail;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Customer;
@@ -86,9 +87,28 @@ class CartService
                 'content' => $request->content,
 
             ]);
+            // dd($customer->products()->pluck('name')-);
             $this->infoProductCart($carts, $customer->id);
             DB::commit();
             Session::flash('success','Đặt hàng thành công');
+            $products= $customer->products;
+            $orders = [];
+            foreach ($products as $product){
+                $quatity = 0;
+                foreach($customer->products()->select('qty')->where('product_id',$product->id)->get() as $qty){
+                    $quatity = $qty->qty;
+                }
+                $orders[] =[
+                    'name' =>$product->name,
+                    'price'=>price($product->price,$product->price_sale),
+                    'qty'=> $quatity,
+
+                ]; 
+                unset($quality);
+            }
+            #Queue 
+            SendMail::dispatch($request->email,$orders)->delay(now()->addSecond(2));
+            
             Session::forget('carts');
         } catch(\Exception $e){
             DB::rollBack();

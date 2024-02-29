@@ -9,4 +9,11 @@ class Customer extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    // public function carts(){
+    //     return $this->belongsToMany(Product::class,);
+    // }
+    public function products(){
+        return $this->belongsToMany(Product::class,'carts', 'customer_id', 'product_id');
+    }
 }
